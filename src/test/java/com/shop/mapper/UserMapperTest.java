@@ -1,4 +1,4 @@
-package com.shop;
+package com.shop.mapper;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

@@ -143,5 +143,29 @@
 			</div>
 		</footer>
 		<!--页脚结束-->
+		<script type="text/javascript">
+			$("#btn-login").click(function(){
+				$.ajax({
+					url:"/users/login",
+					type:"POST",
+					data:$("#form-login").serialize(),
+					dataType:"JSON",
+					success:function(json){
+						if(json.state==200){
+							alert("Login success !");
+							//登陆成功后跳转到index.html. 
+							//相对路径的表达路径也可以根据实际需要../../index.html
+							location.href = "index.html";
+						} else{
+							alert("Login fail !");
+						}
+					},
+					error:function(xhr){
+						alert("Enounter unexpected error, login fail: " + xhr.status);
+
+					}
+				});
+			});
+		</Script>
 	</body>
 </html>

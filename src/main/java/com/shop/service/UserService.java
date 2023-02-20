@@ -10,5 +10,6 @@ import com.shop.entity.User;
 public interface UserService {
 
 	void registUser(User user);
+	User login(String username, String password);
 
 }

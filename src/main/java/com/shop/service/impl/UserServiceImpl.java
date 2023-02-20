@@ -11,6 +11,8 @@ import com.shop.entity.User;
 import com.shop.mapper.UserMapper;
 import com.shop.service.UserService;
 import com.shop.service.exception.InsertException;
+import com.shop.service.exception.PasswordNotMatchException;
+import com.shop.service.exception.UserNotFoundException;
 import com.shop.service.exception.UsernameDuplicatedException;
 
 /**
@@ -66,6 +68,29 @@ public class UserServiceImpl implements UserService{
 			password = DigestUtils.md5DigestAsHex((salt + password + salt).getBytes()).toUpperCase();
 		}
 		return password;
+	}
+
+	@Override
+	public User login(String username, String password) {
+		
+		User result = userMapper.findByUsername(username);
+		if(result==null) {
+			throw new UserNotFoundException("User not found !");
+		}
+		
+		//get encrypted password from mySql
+		String encryptedPassword = result.getPassword();
+		String salt = result.getSalt();
+		String newPassword = getMD5Password(password, salt);
+		if(!newPassword.equals(newPassword)) {
+			throw new PasswordNotMatchException("Password not match!");
+		}
+		
+		if(result.getIsDelete()==1) {
+			throw new UserNotFoundException("User not found !");
+		}
+		
+		return result;
 	}
 
 }

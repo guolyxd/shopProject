@@ -7,7 +7,9 @@ package com.shop.controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.shop.service.exception.InsertException;
+import com.shop.service.exception.PasswordNotMatchException;
 import com.shop.service.exception.ServiceException;
+import com.shop.service.exception.UserNotFoundException;
 import com.shop.service.exception.UsernameDuplicatedException;
 import com.shop.utils.JsonResult;
 
@@ -20,7 +22,13 @@ public class BaseController {
 		if(e instanceof UsernameDuplicatedException) {
 			result.setState(4000);
 			result.setMsg("Exist username");
-		} else if(e instanceof InsertException) {
+		} else if(e instanceof UserNotFoundException) {
+			result.setState(5001);
+			result.setMsg("User not found exception !");
+		}else if(e instanceof PasswordNotMatchException) {
+			result.setState(5002);
+			result.setMsg("Password not match exception!");
+		}else if(e instanceof InsertException) {
 			result.setState(5000);
 			result.setMsg("Insert error!");
 		}

@@ -32,7 +32,10 @@ public class UserController extends BaseController{
 	@RequestMapping("login")
 	public JsonResult<User> login(String username, String password, HttpSession session){
 		
+		
 		User data = userService.login(username, password);
+		
+		//attach user info into session which will be useful in future .
 		session.setAttribute("uid", data.getUid());
 		session.setAttribute("username", data.getUsername());
 		return new JsonResult<User>(OK, data);

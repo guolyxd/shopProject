@@ -15,17 +15,17 @@ import com.shop.utils.JsonResult;
 @RestController
 @RequestMapping("users")
 public class UserController extends BaseController{
-	
+
 	@Autowired
 	private UserService userService;
-	
+
 	@RequestMapping("reg")
 	public JsonResult<Void> registUser(User user){
-		
+
 		userService.registUser(user);
 		return new JsonResult<>(OK);
-		
+
 	}
-	
+
 
 }

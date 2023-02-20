@@ -11,7 +11,7 @@ import lombok.Data;
 */
 @Data
 public class BaseEntity implements Serializable{
-	
+
 	private String createdUser;
 	private Date createdTime;
 	private String modifiedUser;

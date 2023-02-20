@@ -13,7 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class ShopApp {
 
 	public static void main(String[] args) {
-		
+
 		// TODO Auto-generated method stub
 		SpringApplication.run(ShopApp.class, args);
 

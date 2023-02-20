@@ -10,7 +10,7 @@ import lombok.Data;
 */
 @Data
 public class User extends BaseEntity implements Serializable{
-	
+
 	private Integer uid;
 	private String username;
 	private String password;

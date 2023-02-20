@@ -30,6 +30,6 @@ public class InsertException extends ServiceException{
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 
 }

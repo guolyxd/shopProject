@@ -19,7 +19,7 @@ import com.shop.service.exception.UsernameDuplicatedException;
 */
 @Service
 public class UserServiceImpl implements UserService{
-	
+
 	@Autowired
 	private UserMapper userMapper;
 
@@ -28,11 +28,11 @@ public class UserServiceImpl implements UserService{
 		// TODO Auto-generated method stub
 		String username = user.getUsername();
 		User result = userMapper.findByUsername(username);
-		
+
 		if(result != null) {
 			throw new UsernameDuplicatedException("An exist username");
 		}
-		
+
 		/**
 		 * 密码加密处理的实现：md5算法的形式：687hn09-687hgbnin9-687gboi7-68gvut-76vyui
 		 * 串 + password + 串 -----md5算法进行加密,(连续加密三次)
@@ -43,7 +43,7 @@ public class UserServiceImpl implements UserService{
 		String salt = UUID.randomUUID().toString().toUpperCase();
 		/*将盐值作为一个整体进行加密*/
 		String md5Password = getMD5Password(initPassword, salt);
-		
+
 		user.setSalt(salt);
 		user.setPassword(md5Password);
 		user.setIsDelete(0);
@@ -52,13 +52,13 @@ public class UserServiceImpl implements UserService{
 		Date date = new Date();
 		user.setCreatedTime(date);
 		user.setModifiedTime(date);
-		
-		
+
+
 		Integer rows = userMapper.insert(user);
 		if (rows != 1) {
 			throw new InsertException("Insert error!");
 		}
-		
+
 	}
 
 	private String getMD5Password(String password, String salt) {

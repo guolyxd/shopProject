@@ -14,23 +14,23 @@ public class JsonResult <E> implements Serializable{
 	private Integer state;
 	private String msg;
 	private E data;
-	
-	
+
+
 	public JsonResult() {
 	}
 
 	public JsonResult(Throwable e) {
 		this.msg = e.getMessage();
 	}
-	
+
 	public JsonResult(Integer state) {
 		this.state = state;
 	}
-	
+
 	public JsonResult(Integer state, E data) {
 		this.state = state;
 		this.data = data;
 	}
-	
+
 
 }

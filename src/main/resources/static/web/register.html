@@ -138,6 +138,28 @@
 			</div>
 		</footer>
 		<!--页脚结束-->
+		<script type = "text/javascript">
+		$("#btn-reg").click(function(){
+
+			console.log($("#form-reg").serialize());
+			$.ajax({
+				url:"/users/reg",
+				type:"POST",
+				data:$("#form-reg").serialize(),
+				dataType:"JSON",
+				success: function(json){
+					if(json.state==200){
+						alert("regist success!");
+					} else{
+						alert("regist fail!");
+					}
+				},
+				error: function(xhr){
+					alert("encounter unexpected error during registing:" + xhr.status);
+				}
+			});
+		});
+		</script>
 	</body>
 
 </html>

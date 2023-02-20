@@ -31,6 +31,6 @@ public class UsernameDuplicatedException extends ServiceException {
 		super(cause);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 
 }

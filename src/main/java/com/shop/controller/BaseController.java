@@ -13,7 +13,7 @@ import com.shop.utils.JsonResult;
 
 public class BaseController {
 	public static int OK = 200;
-	
+
 	@ExceptionHandler(ServiceException.class)
 	public JsonResult<Void> handlerException(Throwable e){
 		JsonResult<Void> result = new JsonResult<>(e);
@@ -24,7 +24,7 @@ public class BaseController {
 			result.setState(5000);
 			result.setMsg("Insert error!");
 		}
-		
+
 		return result;
 	}
 

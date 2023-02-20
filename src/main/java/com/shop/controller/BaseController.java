@@ -4,6 +4,8 @@ package com.shop.controller;
 * @CreateDate:Feb 17, 2023
 */
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import com.shop.service.exception.InsertException;
@@ -34,6 +36,14 @@ public class BaseController {
 		}
 
 		return result;
+	}
+	
+	protected final Integer getuidFromSession(HttpSession session) {
+		return Integer.valueOf(session.getAttribute("uid").toString());
+	}
+	
+	protected final String getUsernameFromSession(HttpSession session) {
+		return session.getAttribute("username").toString();
 	}
 
 }

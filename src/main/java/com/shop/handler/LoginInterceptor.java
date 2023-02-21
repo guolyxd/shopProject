@@ -10,11 +10,12 @@ import org.springframework.web.servlet.HandlerInterceptor;
 * @CreateDate:Feb 20, 2023
 */
 
+
 public class LoginInterceptor implements HandlerInterceptor{
 	
-	public boolean prehandle(HttpServletRequest request, 
-			                 HttpServletResponse response, 
-			                 Object handler) throws Exception {
+	@Override
+	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
+			throws Exception {
 		Object obj = request.getSession().getAttribute("uid");
 		if(obj == null) {
 			response.sendRedirect("/web/login.html");

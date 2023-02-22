@@ -40,5 +40,12 @@ public interface UserMapper {
 	 * @return 成功则返回user信息，失败则返回Null
 	 */
 	User findByUid(Integer uid);
+	
+	/**
+	 * 
+	 * @param user
+	 * @return 返回受影响的行数
+	 */
+	Integer updateInfoByUid(User user);
 
 }

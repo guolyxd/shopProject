@@ -12,6 +12,7 @@ import com.shop.mapper.UserMapper;
 import com.shop.service.UserService;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
+import com.shop.service.exception.UpdateException;
 import com.shop.service.exception.UserNotFoundException;
 import com.shop.service.exception.UsernameDuplicatedException;
 
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService{
 		String encryptedPassword = result.getPassword();
 		String salt = result.getSalt();
 		String newPassword = getMD5Password(password, salt);
-		if(!newPassword.equals(newPassword)) {
+		if(!newPassword.equals(encryptedPassword)) {
 			throw new PasswordNotMatchException("Password not match!");
 		}
 		
@@ -110,6 +111,35 @@ public class UserServiceImpl implements UserService{
 		String newMD5Password = getMD5Password(newPassword, result.getSalt());
 		userMapper.updatePasswordByUid(uid, newMD5Password, username, new Date());
 		
+	}
+
+	@Override
+	public User getByUid(Integer uid) {
+		
+		User result = userMapper.findByUid(uid);
+		if(result==null || result.getIsDelete()==1) {
+			throw new UserNotFoundException("User not found !");
+		}
+		
+		return result;
+	}
+
+	@Override
+	public void changeInfo(Integer uid, String username, User user) {
+        
+		User result = userMapper.findByUid(uid);
+		if(result==null || result.getIsDelete()==1) {
+			throw new UserNotFoundException("User not found !");
+		}
+		user.setUid(uid);
+		user.setModifiedUser(username);
+		user.setModifiedTime(new Date());
+		
+		
+		Integer row = userMapper.updateInfoByUid(user);
+		if(row!=1) {
+			throw new UpdateException("Update info exception !");
+		}
 	}
 
 }

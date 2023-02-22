@@ -142,4 +142,18 @@ public class UserServiceImpl implements UserService{
 		}
 	}
 
+	@Override
+	public void changeAvatar(Integer uid, String avatar, String username) {
+		
+		User result = userMapper.findByUid(uid);
+		if(result==null || result.getIsDelete()==1) {
+			throw new UserNotFoundException("User not found !");
+		}
+		
+		Integer row = userMapper.updateAvatarByUid(uid, avatar, username, new Date());
+		if(row!=1) {
+			throw new UpdateException("Update info exception !");
+		}
+	}
+
 }

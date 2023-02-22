@@ -2,6 +2,8 @@ package com.shop.mapper;
 
 import java.util.Date;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.shop.entity.User;
 
 /**
@@ -47,5 +49,14 @@ public interface UserMapper {
 	 * @return 返回受影响的行数
 	 */
 	Integer updateInfoByUid(User user);
+	
+	/**
+	 * 占位符@Param("SQL映射文件中#{}占位符的变量名")；解决的问题是当SQL语句中的占位符和映射的接口方法参数名不一致时，
+	 * 需要将某个参数强行注入到某个占位符变量上时，可以使用@Param注解来标识映射关系。
+	 */
+	Integer updateAvatarByUid(@Param("uid") Integer uid,
+			                  @Param("avatar") String avatar,
+			                  @Param("modifiedUser") String modifiedUser,
+			                  @Param("modifiedTime") Date modifiedTime);
 
 }

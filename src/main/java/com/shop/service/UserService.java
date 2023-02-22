@@ -14,5 +14,6 @@ public interface UserService {
 	void changePassword(Integer uid, String username, String oldPassword,String newPassword);
 	User getByUid(Integer uid);
 	void changeInfo(Integer uid, String username,User user);
+	void changeAvatar(Integer uid,String avatar,String username);
 	
 }

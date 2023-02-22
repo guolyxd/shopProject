@@ -8,6 +8,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
+import com.shop.controller.FileException.FileEmptyException;
+import com.shop.controller.FileException.FileSizeException;
+import com.shop.controller.FileException.FileStateException;
+import com.shop.controller.FileException.FileTypeException;
+import com.shop.controller.FileException.FileUploadException;
+import com.shop.controller.FileException.FileUploadIOException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
 import com.shop.service.exception.ServiceException;
@@ -19,7 +25,7 @@ import com.shop.utils.JsonResult;
 public class BaseController {
 	public static int OK = 200;
 
-	@ExceptionHandler(ServiceException.class)
+	@ExceptionHandler({ServiceException.class, FileUploadException.class})
 	public JsonResult<Void> handlerException(Throwable e){
 		JsonResult<Void> result = new JsonResult<>(e);
 		if(e instanceof UsernameDuplicatedException) {
@@ -37,9 +43,18 @@ public class BaseController {
 		}else if(e instanceof UpdateException) {
 			result.setState(5003);
 			result.setMsg("Update error!");
-		}
-
-		return result;
+		}else if (e instanceof FileEmptyException) {
+            result.setState(6000);
+        } else if (e instanceof FileSizeException) {
+            result.setState(6001);
+        } else if (e instanceof FileTypeException) {
+            result.setState(6002);
+        } else if (e instanceof FileStateException) {
+            result.setState(6003);
+        } else if (e instanceof FileUploadIOException) {
+            result.setState(6004);
+        }
+        return result;
 	}
 	
 	protected final Integer getuidFromSession(HttpSession session) {

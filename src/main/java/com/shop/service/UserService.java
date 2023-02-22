@@ -11,5 +11,6 @@ public interface UserService {
 
 	void registUser(User user);
 	User login(String username, String password);
+	void changePassword(Integer uid, String username, String oldPassword,String newPassword);
 
 }

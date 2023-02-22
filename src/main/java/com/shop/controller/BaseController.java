@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
 import com.shop.service.exception.ServiceException;
+import com.shop.service.exception.UpdateException;
 import com.shop.service.exception.UserNotFoundException;
 import com.shop.service.exception.UsernameDuplicatedException;
 import com.shop.utils.JsonResult;
@@ -33,6 +34,9 @@ public class BaseController {
 		}else if(e instanceof InsertException) {
 			result.setState(5000);
 			result.setMsg("Insert error!");
+		}else if(e instanceof UpdateException) {
+			result.setState(5003);
+			result.setMsg("Update error!");
 		}
 
 		return result;

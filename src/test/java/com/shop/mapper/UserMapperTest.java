@@ -1,5 +1,7 @@
 package com.shop.mapper;
 
+import java.util.Date;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,15 @@ public class UserMapperTest {
 		Integer row = userMapper.insert(user);
 		System.out.println(row);
 
+	}
+	@Test
+	public void updatePasswordByUidTest() {
+		userMapper.updatePasswordByUid(2, "r7491", "ccddeeff", new Date());
+	}
+	
+	@Test
+	public void findByUidTest() {
+		System.out.println(userMapper.findByUid(3));
 	}
 
 }

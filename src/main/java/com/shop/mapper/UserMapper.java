@@ -1,5 +1,7 @@
 package com.shop.mapper;
 
+import java.util.Date;
+
 import com.shop.entity.User;
 
 /**
@@ -21,5 +23,22 @@ public interface UserMapper {
 	 * @return
 	 */
 	User findByUsername(String username);
+	
+	/**
+	 * 
+	 * @param uid
+	 * @param password
+	 * @param modifiedUser
+	 * @param modifiedTime
+	 * @return 返回值为受影响的行
+	 */
+	Integer updatePasswordByUid(Integer uid, String password, String modifiedUser, Date modifiedTime);
+	
+	/**
+	 * 
+	 * @param uid
+	 * @return 成功则返回user信息，失败则返回Null
+	 */
+	User findByUid(Integer uid);
 
 }

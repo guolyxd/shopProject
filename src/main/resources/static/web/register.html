@@ -138,28 +138,24 @@
 			</div>
 		</footer>
 		<!--页脚结束-->
-		<script type = "text/javascript">
-		$("#btn-reg").click(function(){
 
-			console.log($("#form-reg").serialize());
-			$.ajax({
-				url:"/users/reg",
-				type:"POST",
-				data:$("#form-reg").serialize(),
-				dataType:"JSON",
-				success: function(json){
-					if(json.state==200){
-						alert("regist success!");
-					} else{
-						alert("regist fail!");
+		<script type="text/javascript">
+			$("#btn-reg").click(function() {
+				$.ajax({
+					url: "/users/reg",
+					type: "POST",
+					data: $("#form-reg").serialize(),
+					dataType: "json",
+					success: function(json) {
+						if (json.state == 200) {
+							alert("注册成功！");
+							// location.href = "login.html";
+						} else {
+							alert("注册失败！" + json.message);
+						}
 					}
-				},
-				error: function(xhr){
-					alert("Encounter unexpected error during registing:" + xhr.status);
-				}
+				});
 			});
-		});
 		</script>
 	</body>
-
 </html>

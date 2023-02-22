@@ -20,7 +20,7 @@ public class WebConfig implements WebMvcConfigurer{
 		HandlerInterceptor interceptor = new LoginInterceptor(); 
 		registry.addInterceptor(interceptor)
 		        .addPathPatterns("/**")
-		        .excludePathPatterns("/bootstraps/**")
+		        .excludePathPatterns("/bootstrap3/**")
 		        .excludePathPatterns("/css/**")
 		        .excludePathPatterns("/images/**")
 		        .excludePathPatterns("/js/**")
@@ -31,8 +31,6 @@ public class WebConfig implements WebMvcConfigurer{
 		        .excludePathPatterns("/users/reg")
 		        .excludePathPatterns("/users/login")
 		        .excludePathPatterns("/web/");
-	//	        .excludePathPatterns("/register")
-	//	        .excludePathPatterns("/login");
 	}
 
 

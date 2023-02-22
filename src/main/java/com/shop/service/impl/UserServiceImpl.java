@@ -93,4 +93,23 @@ public class UserServiceImpl implements UserService{
 		return result;
 	}
 
+	@Override
+	public void changePassword(Integer uid, String username, String oldPassword, String newPassword) {
+		// TODO Auto-generated method stub
+		User result = userMapper.findByUid(uid);
+		if(result == null ||result.getIsDelete()==1) {
+			throw new UserNotFoundException("User not found ！");
+		}
+		
+		String oldMD5Password = getMD5Password(oldPassword,result.getSalt());
+		System.out.println(oldMD5Password);
+		if(!result.getPassword().equals(oldMD5Password)) {
+			throw new PasswordNotMatchException("Password not match !");
+		}
+		
+		String newMD5Password = getMD5Password(newPassword, result.getSalt());
+		userMapper.updatePasswordByUid(uid, newMD5Password, username, new Date());
+		
+	}
+
 }

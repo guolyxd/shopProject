@@ -32,9 +32,7 @@ public class UserController extends BaseController{
 	@RequestMapping("login")
 	public JsonResult<User> login(String username, String password, HttpSession session){
 		
-		
 		User data = userService.login(username, password);
-		
 		//attach user info into session which will be useful in future .
 		session.setAttribute("uid", data.getUid());
 		session.setAttribute("username", data.getUsername());
@@ -50,6 +48,23 @@ public class UserController extends BaseController{
 		return new JsonResult<>(OK);
 		
 	}
+	
+	@RequestMapping("get_by_uid")
+	public JsonResult<User> getByUid(HttpSession session){
+		User data = userService.getByUid(getuidFromSession(session));
+		
+		return new JsonResult<>(OK, data);
+	}
+	
+	@RequestMapping("change_info")
+	public JsonResult<Void> changeInfo(User user, HttpSession session){
+		Integer uid = getuidFromSession(session);
+		String username = getUsernameFromSession(session);
+		userService.changeInfo(uid, username, user);
+		
+		return new JsonResult<>(OK);
+	}
+	
 
 
 }

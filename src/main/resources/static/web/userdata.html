@@ -264,6 +264,8 @@
 		<!--页脚结束-->
 
 		<script type="text/javascript">
+
+			<!--特殊情况，getByUser请求在加加载页面时直接获取数据documentready函数;而changeInfo请求是在点击时触发的请求所以使用的是click事件-->
 			$(document).ready(function() {
 				$.ajax({
 					url: "/users/get_by_uid",
@@ -297,8 +299,8 @@
 					dataType: "json",
 					success: function(json) {
 						if (json.state == 200) {
-							alert("修改成功！");
-							location.href = "login.html";
+							alert("change success !");
+							location.href ="userdata.html";
 						} else {
 							alert("修改失败！" + json.message);
 						}

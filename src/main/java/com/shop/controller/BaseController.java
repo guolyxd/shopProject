@@ -14,6 +14,7 @@ import com.shop.controller.FileException.FileStateException;
 import com.shop.controller.FileException.FileTypeException;
 import com.shop.controller.FileException.FileUploadException;
 import com.shop.controller.FileException.FileUploadIOException;
+import com.shop.service.exception.AddressCountLimitException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
 import com.shop.service.exception.ServiceException;
@@ -32,16 +33,19 @@ public class BaseController {
 			result.setState(4000);
 			result.setMsg("Exist username");
 		} else if(e instanceof UserNotFoundException) {
-			result.setState(5001);
+			result.setState(4001);
 			result.setMsg("User not found exception !");
 		}else if(e instanceof PasswordNotMatchException) {
-			result.setState(5002);
+			result.setState(4002);
 			result.setMsg("Password not match exception!");
+		}else if(e instanceof AddressCountLimitException) {
+			result.setState(4003);
+			result.setMsg("Address count limit exception!");
 		}else if(e instanceof InsertException) {
-			result.setState(5000);
+			result.setState(5001);
 			result.setMsg("Insert error!");
 		}else if(e instanceof UpdateException) {
-			result.setState(5003);
+			result.setState(5002);
 			result.setMsg("Update error!");
 		}else if (e instanceof FileEmptyException) {
             result.setState(6000);

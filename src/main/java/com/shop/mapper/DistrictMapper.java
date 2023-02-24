@@ -12,4 +12,5 @@ import com.shop.entity.District;
 public interface DistrictMapper {
 
 	List<District> findByParent(String parent);
+	String findNameByCode(String code);
 }

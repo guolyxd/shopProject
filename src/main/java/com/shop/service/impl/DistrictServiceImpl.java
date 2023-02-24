@@ -33,6 +33,12 @@ public class DistrictServiceImpl implements DistrictService{
 		}
 		return list;
 	}
+
+	@Override
+	public String getNameByCode(String code) {
+		// TODO Auto-generated method stub
+		return districtMapper.findNameByCode(code);
+	}
 	
 
 }

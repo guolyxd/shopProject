@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.shop.entity.Address;
 import com.shop.mapper.AddressMapper;
+import com.shop.mapper.DistrictMapper;
 import com.shop.service.AddressService;
 import com.shop.service.exception.AddressCountLimitException;
 import com.shop.service.exception.InsertException;
@@ -22,6 +23,9 @@ public class AddressServiceImpl implements AddressService{
 	@Autowired
 	private AddressMapper addressMapper;
 	
+	@Autowired
+	private DistrictMapper districtMapper;
+	
 	@Value("${user.address.max-count}")
 	private Integer maxCount;
 
@@ -33,6 +37,13 @@ public class AddressServiceImpl implements AddressService{
 			throw new AddressCountLimitException("Exceed the max limite !");
 		}
 		
+		String provinceName=districtMapper.findNameByCode(address.getProvinceCode());
+		String cityName=districtMapper.findNameByCode(address.getCityCode());
+		String areaName=districtMapper.findNameByCode(address.getAreaCode());
+		
+		address.setProvinceName(provinceName);
+		address.setCityName(cityName);
+		address.setAreaName(areaName);
 		address.setUid(uid);
 		Integer isDefault = count ==0? 1:0;
 		address.setIsDefault(isDefault);

@@ -12,5 +12,6 @@ import com.shop.entity.District;
 public interface DistrictService {
 	
 	List<District> getDistrictByParent(String parent);
+	String getNameByCode(String code);
 
 }

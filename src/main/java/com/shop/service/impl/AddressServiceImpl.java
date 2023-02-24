@@ -1,6 +1,7 @@
 package com.shop.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -59,6 +60,25 @@ public class AddressServiceImpl implements AddressService{
 		}
 		
 		
+	}
+
+	@Override
+	public List<Address> getByUid(Integer uid) {
+		
+		List<Address> list = addressMapper.findByUid(uid);
+		for(Address address : list) {
+			address.setAid(null);
+			address.setUid(null);
+			address.setAreaCode(null);
+			address.setProvinceCode(null);
+			address.setCityCode(null);
+			address.setCreatedTime(null);
+			address.setCreatedUser(null);
+			address.setModifiedTime(null);
+			address.setModifiedUser(null);
+			address.setIsDefault(null);
+		}
+		return list;
 	}
 	
 	

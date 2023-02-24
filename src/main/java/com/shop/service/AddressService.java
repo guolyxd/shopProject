@@ -1,5 +1,7 @@
 package com.shop.service;
 
+import java.util.List;
+
 import com.shop.entity.Address;
 
 /**
@@ -10,5 +12,6 @@ import com.shop.entity.Address;
 public interface AddressService {
 	
 	void addNewAddress(Integer uid, String username, Address address);
+	List<Address> getByUid(Integer uid);
 
 }

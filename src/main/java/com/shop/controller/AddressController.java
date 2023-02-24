@@ -1,5 +1,7 @@
 package com.shop.controller;
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,15 @@ public class AddressController extends BaseController{
 		addressService.addNewAddress(uid, username, address);
 		return new JsonResult<>(OK);
 		
+	}
+	
+	@RequestMapping({"","/"})
+	public JsonResult<List<Address>> getByUid(HttpSession session){
+		
+		Integer uid = getuidFromSession(session);
+		List<Address> list = addressService.getByUid(uid);
+		
+		return new JsonResult<>(OK, list);
 	}
 	
 

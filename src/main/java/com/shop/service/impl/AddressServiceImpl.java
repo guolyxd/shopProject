@@ -11,8 +11,11 @@ import com.shop.entity.Address;
 import com.shop.mapper.AddressMapper;
 import com.shop.mapper.DistrictMapper;
 import com.shop.service.AddressService;
+import com.shop.service.exception.AccessDeniedException;
 import com.shop.service.exception.AddressCountLimitException;
+import com.shop.service.exception.AddressNotFoundException;
 import com.shop.service.exception.InsertException;
+import com.shop.service.exception.UpdateException;
 
 /**
 * @Author:Antony
@@ -67,8 +70,6 @@ public class AddressServiceImpl implements AddressService{
 		
 		List<Address> list = addressMapper.findByUid(uid);
 		for(Address address : list) {
-			address.setAid(null);
-			address.setUid(null);
 			address.setAreaCode(null);
 			address.setProvinceCode(null);
 			address.setCityCode(null);
@@ -80,8 +81,27 @@ public class AddressServiceImpl implements AddressService{
 		}
 		return list;
 	}
-	
-	
-	
+
+	@Override
+	public void updateDefaultAddress(Integer uid, Integer aid, String username) {
+		
+		Address result = addressMapper.findByAid(aid);
+		if(result==null) {
+			throw new AddressNotFoundException("Address not found !");
+		}
+		if(!result.getUid().equals(uid)) {
+			throw new AccessDeniedException("Access denied !");
+		}
+		
+		Integer rows = addressMapper.updateNonDefault(uid);
+		if(rows<1) {
+			throw new UpdateException("Update exception !");
+		}
+		
+		rows = addressMapper.updateDefaultByAid(aid, username, new Date());
+		if(rows != 1) {
+			throw new UpdateException("Update exception !");
+		}
+	}
 
 }

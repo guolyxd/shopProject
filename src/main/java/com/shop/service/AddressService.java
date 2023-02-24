@@ -13,5 +13,6 @@ public interface AddressService {
 	
 	void addNewAddress(Integer uid, String username, Address address);
 	List<Address> getByUid(Integer uid);
+	void updateDefaultAddress(Integer uid, Integer aid, String username);
 
 }

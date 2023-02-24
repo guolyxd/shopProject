@@ -91,7 +91,7 @@ public class UserController extends BaseController{
 	    	   AVATAR_TYPE.add("image/bmp");
 	    	   AVATAR_TYPE.add("image/gif");
 	       }
-	@RequestMapping()
+	@RequestMapping("change_avatar")
 	public JsonResult<String> updateAvatar(HttpSession session, @RequestParam("file") MultipartFile file){
 		
 		if(file.isEmpty()) {

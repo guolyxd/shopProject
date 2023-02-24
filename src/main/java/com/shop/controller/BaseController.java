@@ -49,14 +49,19 @@ public class BaseController {
 			result.setMsg("Update error!");
 		}else if (e instanceof FileEmptyException) {
             result.setState(6000);
+            result.setMsg("File empty!");
         } else if (e instanceof FileSizeException) {
             result.setState(6001);
+            result.setMsg("File size errror!");
         } else if (e instanceof FileTypeException) {
             result.setState(6002);
+            result.setMsg("File type error!");
         } else if (e instanceof FileStateException) {
             result.setState(6003);
+            result.setMsg("File states error!");
         } else if (e instanceof FileUploadIOException) {
             result.setState(6004);
+            result.setMsg("File upload error!");
         }
         return result;
 	}

@@ -11,5 +11,5 @@ import com.shop.entity.District;
 
 public interface DistrictMapper {
 
-	List<District> findByParent(Integer parent);
+	List<District> findByParent(String parent);
 }

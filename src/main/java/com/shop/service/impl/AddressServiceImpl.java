@@ -83,7 +83,7 @@ public class AddressServiceImpl implements AddressService{
 	}
 
 	@Override
-	public void updateDefaultAddress(Integer uid, Integer aid, String username) {
+	public void updateDefaultAddress(Integer aid, Integer uid, String username) {
 		
 		Address result = addressMapper.findByAid(aid);
 		if(result==null) {

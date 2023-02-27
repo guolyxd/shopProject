@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,5 +43,13 @@ public class AddressController extends BaseController{
 		return new JsonResult<>(OK, list);
 	}
 	
+	@RequestMapping("{aid}/set_default")
+	public JsonResult<Void> setDefault(@PathVariable("aid") Integer aid, HttpSession session){
+		
+		addressService.updateDefaultAddress(aid, 
+				                            getuidFromSession(session), 
+				                            getUsernameFromSession(session));
+		return new JsonResult<>(OK);
+	}
 
 }

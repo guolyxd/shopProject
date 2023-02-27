@@ -14,7 +14,9 @@ import com.shop.controller.FileException.FileStateException;
 import com.shop.controller.FileException.FileTypeException;
 import com.shop.controller.FileException.FileUploadException;
 import com.shop.controller.FileException.FileUploadIOException;
+import com.shop.service.exception.AccessDeniedException;
 import com.shop.service.exception.AddressCountLimitException;
+import com.shop.service.exception.AddressNotFoundException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
 import com.shop.service.exception.ServiceException;
@@ -26,7 +28,7 @@ import com.shop.utils.JsonResult;
 public class BaseController {
 	public static int OK = 200;
 
-	@ExceptionHandler({ServiceException.class, FileUploadException.class})
+	@ExceptionHandler({ServiceException.class, FileUploadException.class, AddressNotFoundException.class, AccessDeniedException.class})
 	public JsonResult<Void> handlerException(Throwable e){
 		JsonResult<Void> result = new JsonResult<>(e);
 		if(e instanceof UsernameDuplicatedException) {
@@ -41,6 +43,12 @@ public class BaseController {
 		}else if(e instanceof AddressCountLimitException) {
 			result.setState(4003);
 			result.setMsg("Address count limit exception!");
+		}else if(e instanceof AddressNotFoundException) {
+			result.setState(4004);
+			result.setMsg("Address not found exception!");
+		}else if(e instanceof AccessDeniedException) {
+			result.setState(4005);
+			result.setMsg("Access denied exception!");
 		}else if(e instanceof InsertException) {
 			result.setState(5001);
 			result.setMsg("Insert error!");

@@ -97,7 +97,7 @@
     </delete>
 
     <!-- 查询某用户最后修改的收货地址：Address findLastModified(Integer uid) -->
-    <select id="findLastModified" resultMap="AddressEntityMap">
+    <select id="findLastModifiedByUid" resultMap="AddressEntityMap">
         SELECT
             *
         FROM

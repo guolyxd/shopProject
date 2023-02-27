@@ -14,6 +14,7 @@ import com.shop.service.AddressService;
 import com.shop.service.exception.AccessDeniedException;
 import com.shop.service.exception.AddressCountLimitException;
 import com.shop.service.exception.AddressNotFoundException;
+import com.shop.service.exception.DeleteException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.UpdateException;
 
@@ -101,6 +102,34 @@ public class AddressServiceImpl implements AddressService{
 		rows = addressMapper.updateDefaultByAid(aid, username, new Date());
 		if(rows != 1) {
 			throw new UpdateException("Update exception !");
+		}
+	}
+
+	@Override
+	public void delete(Integer uid, Integer aid, String username) {
+		
+		Address result = addressMapper.findByAid(aid);
+		if(result==null) {
+			throw new AddressNotFoundException("Addrress not found !");
+		}
+		if(!result.getUid().equals(uid)) {
+			throw new AccessDeniedException("Access denied !");
+		}
+		
+		Integer rows = addressMapper.deleteByAid(aid);
+		if(rows!=1) {
+			throw new DeleteException("Address delete exception !");
+		}
+		
+		Integer count = addressMapper.countByUid(uid);
+		if(count==0) {
+			return;
+		}
+		
+		Address address = addressMapper.findLastModifiedByUid(uid);
+		rows = addressMapper.updateDefaultByAid(address.getAid(), username, new Date());
+		if(rows != 1) {
+			throw new UpdateException("Update default exception!");
 		}
 	}
 

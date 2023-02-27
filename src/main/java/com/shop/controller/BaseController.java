@@ -17,6 +17,7 @@ import com.shop.controller.FileException.FileUploadIOException;
 import com.shop.service.exception.AccessDeniedException;
 import com.shop.service.exception.AddressCountLimitException;
 import com.shop.service.exception.AddressNotFoundException;
+import com.shop.service.exception.DeleteException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
 import com.shop.service.exception.ServiceException;
@@ -55,6 +56,9 @@ public class BaseController {
 		}else if(e instanceof UpdateException) {
 			result.setState(5002);
 			result.setMsg("Update error!");
+		}else if(e instanceof DeleteException) {
+			result.setState(5003);
+			result.setMsg("Delete error!");
 		}else if (e instanceof FileEmptyException) {
             result.setState(6000);
             result.setMsg("File empty!");

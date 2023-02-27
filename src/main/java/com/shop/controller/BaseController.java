@@ -20,6 +20,7 @@ import com.shop.service.exception.AddressNotFoundException;
 import com.shop.service.exception.DeleteException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
+import com.shop.service.exception.ProductNotFoundException;
 import com.shop.service.exception.ServiceException;
 import com.shop.service.exception.UpdateException;
 import com.shop.service.exception.UserNotFoundException;
@@ -50,6 +51,9 @@ public class BaseController {
 		}else if(e instanceof AccessDeniedException) {
 			result.setState(4005);
 			result.setMsg("Access denied exception!");
+		}else if(e instanceof ProductNotFoundException) {
+			result.setState(4006);
+			result.setMsg("Product not found exception!");
 		}else if(e instanceof InsertException) {
 			result.setState(5001);
 			result.setMsg("Insert error!");

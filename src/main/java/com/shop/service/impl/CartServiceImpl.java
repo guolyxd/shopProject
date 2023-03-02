@@ -11,6 +11,8 @@ import com.shop.entity.Product;
 import com.shop.mapper.CartMapper;
 import com.shop.mapper.ProductMapper;
 import com.shop.service.CartService;
+import com.shop.service.exception.AccessDeniedException;
+import com.shop.service.exception.CartNotFoundException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.UpdateException;
 import com.shop.vo.CartVO;
@@ -69,6 +71,26 @@ public class CartServiceImpl implements CartService{
 		
 		return cartMapper.findVOByUid(uid);
 		
+	}
+
+	@Override
+	public Integer addNum(Integer cid, Integer uid, String username) {
+		
+		Cart result = cartMapper.findByCid(cid);
+		if(result==null) {
+			throw new CartNotFoundException("Cart not found");
+		}
+		if(!result.getUid().equals(uid)) {
+			throw new AccessDeniedException("Access denied !");
+		}
+		
+		Integer num = result.getNum()+1;
+		Integer rows=cartMapper.updateNumByCid(cid, num, username, new Date());
+		if(rows!=1) {
+			throw new UpdateException("Update exception");
+		}
+		
+		return num;
 	}
 
 }

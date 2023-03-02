@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -42,6 +43,15 @@ public class CartController extends BaseController{
 		List<CartVO> data = cartService.getVOByUid(getuidFromSession(session));
 		return new JsonResult<>(OK, data);
 	}
+	
+	@RequestMapping("{cid}/num/add")
+	public JsonResult<Integer> addNum(@PathVariable("cid") Integer cid, HttpSession session){
+	
+		Integer num = cartService.addNum(cid, getuidFromSession(session), getUsernameFromSession(session));
+		return new JsonResult<>(OK, num);
+	}
+	
+	
 	
 
 }

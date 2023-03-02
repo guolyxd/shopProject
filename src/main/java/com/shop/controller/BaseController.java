@@ -17,6 +17,7 @@ import com.shop.controller.FileException.FileUploadIOException;
 import com.shop.service.exception.AccessDeniedException;
 import com.shop.service.exception.AddressCountLimitException;
 import com.shop.service.exception.AddressNotFoundException;
+import com.shop.service.exception.CartNotFoundException;
 import com.shop.service.exception.DeleteException;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.PasswordNotMatchException;
@@ -54,6 +55,9 @@ public class BaseController {
 		}else if(e instanceof ProductNotFoundException) {
 			result.setState(4006);
 			result.setMsg("Product not found exception!");
+		}else if(e instanceof CartNotFoundException) {
+			result.setState(4007);
+			result.setMsg("Cart not found exception!");
 		}else if(e instanceof InsertException) {
 			result.setState(5001);
 			result.setMsg("Insert error!");

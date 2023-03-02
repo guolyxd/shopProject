@@ -1,6 +1,7 @@
 package com.shop.service.impl;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import com.shop.mapper.ProductMapper;
 import com.shop.service.CartService;
 import com.shop.service.exception.InsertException;
 import com.shop.service.exception.UpdateException;
+import com.shop.vo.CartVO;
 
 /**
 * @Author:Antony
@@ -59,6 +61,13 @@ public class CartServiceImpl implements CartService{
 			}
 			
 		}
+		
+	}
+
+	@Override
+	public List<CartVO> getVOByUid(Integer uid) {
+		
+		return cartMapper.findVOByUid(uid);
 		
 	}
 

@@ -46,5 +46,12 @@ public class CartMapperTest {
 		Cart cart = cartMapper.findByUidAndPid(5, 10000099);
 		System.err.println(cart);
 	}
+	
+	@Test
+	public void findVOByUidTest() {
+
+		System.out.println(cartMapper.findVOByUid(5));
+	}
+
 
 }

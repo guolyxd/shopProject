@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -51,7 +52,12 @@ public class CartController extends BaseController{
 		return new JsonResult<>(OK, num);
 	}
 	
+	@RequestMapping("list")
+	public JsonResult<List<CartVO>> getVOByCid(Integer[] cids, HttpSession session){
 	
+		List<CartVO> data = cartService.getVOByCid(getuidFromSession(session), cids);
+		return new JsonResult<>(OK, data);
+	}
 	
 
 }

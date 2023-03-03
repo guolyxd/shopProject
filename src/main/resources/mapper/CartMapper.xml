@@ -78,7 +78,7 @@
     </select>
 
     <!-- 根据若干个购物车数据id查询详情的列表：List<CartVO> findVOByCids(Integer[] cids) -->
-    <select id="findVOByCids" resultType="com.shop.vo.CartVO">
+    <select id="findVOByCid" resultType="com.shop.vo.CartVO">
         SELECT
             cid,
             uid,

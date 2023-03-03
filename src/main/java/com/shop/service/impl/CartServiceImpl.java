@@ -1,6 +1,7 @@
 package com.shop.service.impl;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -91,6 +92,21 @@ public class CartServiceImpl implements CartService{
 		}
 		
 		return num;
+	}
+
+	@Override
+	public List<CartVO> getVOByCid(Integer uid, Integer[] cids) {
+		
+		List<CartVO> list = cartMapper.findVOByCid(cids);
+		Iterator<CartVO> it= list.iterator();
+		while(it.hasNext()) {
+			CartVO cartVo= it.next();
+			if(!cartVo.getUid().equals(uid)) {
+				list.remove(cartVo);
+			}
+		}
+		
+		return list;
 	}
 
 }

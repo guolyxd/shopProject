@@ -17,7 +17,7 @@ public class CartVO implements Serializable{
 	private Long price;
 	private Integer num;
 	private String title;
-	private Integer realPrice;
+	private Long realPrice;
 	private String image;
 
 }

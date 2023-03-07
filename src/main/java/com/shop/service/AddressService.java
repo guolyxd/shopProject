@@ -15,5 +15,6 @@ public interface AddressService {
 	List<Address> getByUid(Integer uid);
 	void updateDefaultAddress(Integer uid, Integer aid, String username);
 	void delete(Integer uid,Integer aid, String username);
+	public Address getByAid(Integer aid, Integer uid);
 	
 }

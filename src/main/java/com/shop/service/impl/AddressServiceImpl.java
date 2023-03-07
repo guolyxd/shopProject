@@ -133,4 +133,21 @@ public class AddressServiceImpl implements AddressService{
 		}
 	}
 
+	@Override
+	public Address getByAid(Integer aid, Integer uid) {
+		
+		Address address = addressMapper.findByAid(aid);
+		if(address == null) {
+			throw new AddressNotFoundException("Address not found !");
+		}
+		if(!address.getUid().equals(uid)) {
+			throw new AccessDeniedException("Access denied!");
+		}
+		
+		address.setProvinceCode(null);
+		address.setCityCode(null);
+		
+		return address;
+	}
+
 }

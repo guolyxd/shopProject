@@ -1,0 +1,2 @@
+INSERT INTO `t_cart` (`cid`, `uid`, `pid`, `price`, `num`, `created_user`, `created_time`, `modified_user`, `modified_time`) VALUES (12, 5, 10000017, 4604, 1, 'Tom01', '2023-03-08 10:13:47', 'Tom01', '2023-03-08 10:13:47');
+INSERT INTO `t_cart` (`cid`, `uid`, `pid`, `price`, `num`, `created_user`, `created_time`, `modified_user`, `modified_time`) VALUES (13, 9, 10000042, 4399, 1, 'user01', '2023-03-08 10:19:26', 'user01', '2023-03-08 10:19:26');

@@ -31,10 +31,7 @@ public class CartController extends BaseController{
 	@RequestMapping("add_to_cart")
 	public JsonResult<Void> addToCart(Integer pid, Integer amount, HttpSession session){
 		
-		cartService.addToCart(getuidFromSession(session), 
-						     pid, 
-						     amount, 
-						     getUsernameFromSession(session));
+		cartService.addToCart(getuidFromSession(session),pid, amount, getUsernameFromSession(session));
 		return new JsonResult<>(OK);
 	}
 	
